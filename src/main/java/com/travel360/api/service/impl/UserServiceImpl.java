@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         
         User user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
         
-        return new LoginResponse(jwt, user.getId(), user.getUsername(), user.getFullName(), user.getRole());
+        return new LoginResponse(jwt, user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getRole());
     }
 
     @Override
@@ -61,7 +61,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
-        user.setFullName(registerRequest.getFullName());
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
         user.setEmail(registerRequest.getEmail());
         user.setPhoneNumber(registerRequest.getPhoneNumber());
         user.setRole(role);

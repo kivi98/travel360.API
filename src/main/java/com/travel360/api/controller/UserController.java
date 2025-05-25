@@ -2,6 +2,7 @@ package com.travel360.api.controller;
 
 import com.travel360.api.model.User;
 import com.travel360.api.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @PreAuthorize("hasRole('ADMINISTRATOR')")
+@Tag(name = "User Management", description = "Administrative APIs for managing users (Administrator access required)")
 public class UserController {
 
     @Autowired

@@ -27,6 +27,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findByFlightId(@Param("flightId") Long flightId);
     
     @Query("SELECT DISTINCT b FROM Booking b JOIN b.bookingDetails bd " +
-           "WHERE bd.passengerName LIKE %:passengerName% OR b.user.fullName LIKE %:passengerName%")
+           "WHERE bd.passengerName LIKE %:passengerName% OR b.user.firstName LIKE %:passengerName%")
     List<Booking> findByPassengerNameOrUserName(@Param("passengerName") String passengerName);
 }

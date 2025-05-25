@@ -6,6 +6,7 @@ import com.travel360.api.model.BookingStatus;
 import com.travel360.api.model.User;
 import com.travel360.api.service.BookingService;
 import com.travel360.api.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bookings")
+@Tag(name = "Booking Management", description = "APIs for managing flight bookings, reservations, and related documents")
 public class BookingController {
 
     @Autowired

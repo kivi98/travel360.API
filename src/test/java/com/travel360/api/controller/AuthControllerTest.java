@@ -57,6 +57,7 @@ public class AuthControllerTest {
                 1L,
                 "testuser",
                 "Test User",
+                "User",
                 Role.CUSTOMER
         );
 
@@ -83,7 +84,8 @@ public class AuthControllerTest {
         registerRequest.setUsername("newuser");
         registerRequest.setPassword("password123");
         registerRequest.setEmail("newuser@example.com");
-        registerRequest.setFullName("New User");
+        registerRequest.setFirstName("New User");
+        registerRequest.setLastName("User");
 
         User mockUser = new User();
         mockUser.setId(1L);
@@ -111,7 +113,8 @@ public class AuthControllerTest {
         registerRequest.setUsername("newoperator");
         registerRequest.setPassword("password123");
         registerRequest.setEmail("operator@example.com");
-        registerRequest.setFullName("New Operator");
+        registerRequest.setFirstName("New Operator");
+        registerRequest.setLastName("Operator");
 
         User mockUser = new User();
         mockUser.setId(2L);
@@ -139,7 +142,8 @@ public class AuthControllerTest {
         registerRequest.setUsername("newoperator");
         registerRequest.setPassword("password123");
         registerRequest.setEmail("operator@example.com");
-        registerRequest.setFullName("New Operator");
+        registerRequest.setFirstName("New Operator");
+        registerRequest.setLastName("Operator");
 
         // Perform the test - should fail due to insufficient permissions
         mockMvc.perform(post("/api/auth/register/operator")

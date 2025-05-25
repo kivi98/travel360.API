@@ -1,3 +1,6 @@
+com/travel360/api/controller/BookingControllerTest.class
 com/travel360/api/controller/AuthControllerTest.class
+com/travel360/api/config/TestConfig.class
 com/travel360/api/controller/AuthControllerIntegrationTest.class
+com/travel360/api/controller/FlightControllerTest.class
 com/travel360/api/Travel360ApiApplicationTests.class

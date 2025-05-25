@@ -18,7 +18,11 @@ public class RegisterRequest {
     
     @NotBlank
     @Size(max = 100)
-    private String fullName;
+    private String firstName;
+
+    @NotBlank
+    @Size(max = 100)
+    private String lastName;
     
     @Email
     @NotBlank

@@ -47,7 +47,8 @@ public class AuthControllerIntegrationTest {
         RegisterRequest adminRequest = new RegisterRequest();
         adminRequest.setUsername("admin");
         adminRequest.setPassword("admin123");
-        adminRequest.setFullName("Admin User");
+        adminRequest.setFirstName("Admin User");
+        adminRequest.setLastName("Admin");
         adminRequest.setEmail("admin@example.com");
 
         mockMvc.perform(post("/api/auth/register")
@@ -87,7 +88,8 @@ public class AuthControllerIntegrationTest {
         registerRequest.setUsername("testuser");
         registerRequest.setPassword("password123");
         registerRequest.setEmail("user@example.com");
-        registerRequest.setFullName("Test User");
+        registerRequest.setFirstName("Test User");
+        registerRequest.setLastName("User");
 
         mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -115,7 +117,8 @@ public class AuthControllerIntegrationTest {
         registerRequest.setUsername("operator");
         registerRequest.setPassword("operator123");
         registerRequest.setEmail("operator@example.com");
-        registerRequest.setFullName("Operator User");
+        registerRequest.setFirstName("Operator User");
+        registerRequest.setLastName("User");
 
         mockMvc.perform(post("/api/auth/register/operator")
                 .header("Authorization", "Bearer " + adminToken)
