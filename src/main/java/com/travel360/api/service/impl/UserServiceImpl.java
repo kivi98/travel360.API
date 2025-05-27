@@ -3,6 +3,8 @@ package com.travel360.api.service.impl;
 import com.travel360.api.dto.auth.LoginRequest;
 import com.travel360.api.dto.auth.LoginResponse;
 import com.travel360.api.dto.auth.RegisterRequest;
+import com.travel360.api.dto.auth.RegisterResponse;
+import com.travel360.api.dto.user.UserResponse;
 import com.travel360.api.model.Role;
 import com.travel360.api.model.User;
 import com.travel360.api.repository.UserRepository;
@@ -16,6 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,11 +49,18 @@ public class UserServiceImpl implements UserService {
         
         User user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
         
-        return new LoginResponse(jwt, user.getId(), user.getUsername(), user.getFirstName(), user.getLastName(), user.getRole());
+        return new LoginResponse(
+            jwt, 
+            user.getId(), 
+            user.getUsername(), 
+            user.getFirstName(), 
+            user.getLastName(), 
+            user.getEmail(),
+            user.getRole());
     }
 
     @Override
-    public User registerUser(RegisterRequest registerRequest, Role role) {
+    public RegisterResponse registerUser(RegisterRequest registerRequest, Role role) {
         if (usernameExists(registerRequest.getUsername())) {
             throw new RuntimeException("Username is already taken");
         }
@@ -67,12 +78,35 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(registerRequest.getPhoneNumber());
         user.setRole(role);
         
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        
+        // Create and return RegisterResponse
+        RegisterResponse response = new RegisterResponse();
+        response.setUserId(savedUser.getId());
+        response.setUsername(savedUser.getUsername());
+        response.setFirstName(savedUser.getFirstName());
+        response.setLastName(savedUser.getLastName());
+        response.setRole(savedUser.getRole());
+        
+        return response;
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserResponse(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getEmail(),
+                        user.getPhoneNumber(),
+                        user.getRole() != null ? user.getRole().name() : null,
+                        user.isActive(),
+                        user.getCreatedAt() != null ? Date.from(user.getCreatedAt().atZone(ZoneId.systemDefault()).toInstant()) : null,
+                        user.getUpdatedAt() != null ? Date.from(user.getUpdatedAt().atZone(ZoneId.systemDefault()).toInstant()) : null
+                ))
+                .toList();
     }
 
     @Override

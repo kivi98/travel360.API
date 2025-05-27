@@ -3,6 +3,8 @@ package com.travel360.api.service;
 import com.travel360.api.dto.auth.LoginRequest;
 import com.travel360.api.dto.auth.LoginResponse;
 import com.travel360.api.dto.auth.RegisterRequest;
+import com.travel360.api.dto.auth.RegisterResponse;
+import com.travel360.api.dto.user.UserResponse;
 import com.travel360.api.model.Role;
 import com.travel360.api.model.User;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,9 @@ public interface UserService {
     
     LoginResponse authenticateUser(LoginRequest loginRequest);
     
-    User registerUser(RegisterRequest registerRequest, Role role);
+    RegisterResponse registerUser(RegisterRequest registerRequest, Role role);
     
-    List<User> getAllUsers();
+    List<UserResponse> getAllUsers();
     
     Optional<User> getUserById(Long id);
     

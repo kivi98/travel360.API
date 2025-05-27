@@ -1,4 +1,5 @@
 com/travel360/api/service/impl/UserServiceImpl.class
+com/travel360/api/exception/GlobalExceptionHandler.class
 com/travel360/api/controller/FlightController.class
 com/travel360/api/dto/booking/BookingResponse.class
 com/travel360/api/config/CorsConfig.class
@@ -7,8 +8,10 @@ com/travel360/api/model/Airport.class
 com/travel360/api/controller/UserController.class
 com/travel360/api/controller/CorsInfoController.class
 com/travel360/api/service/BookingService.class
+com/travel360/api/dto/user/UserResponse.class
 com/travel360/api/repository/AirplaneRepository.class
 com/travel360/api/config/OpenApiConfig.class
+com/travel360/api/dto/common/ApiResponse.class
 com/travel360/api/controller/BookingController.class
 com/travel360/api/model/User.class
 com/travel360/api/dto/booking/BookingRequest.class
@@ -16,6 +19,7 @@ com/travel360/api/model/FlightStatus.class
 com/travel360/api/security/JwtAuthFilter.class
 com/travel360/api/dto/auth/LoginResponse.class
 com/travel360/api/dto/booking/BookingResponse$BookingDetailDto.class
+com/travel360/api/dto/auth/RegisterResponse.class
 com/travel360/api/repository/AirportRepository.class
 com/travel360/api/model/Role.class
 com/travel360/api/dto/booking/BookingRequest$PassengerDetail.class
@@ -31,8 +35,8 @@ com/travel360/api/controller/AuthController.class
 com/travel360/api/repository/FlightRepository.class
 com/travel360/api/model/Airplane.class
 com/travel360/api/service/UserService.class
-com/travel360/api/Travel360ApiApplication.class
 com/travel360/api/dto/flight/FlightSearchRequest.class
+com/travel360/api/Travel360ApiApplication.class
 com/travel360/api/model/SeatClass.class
 com/travel360/api/model/Booking.class
 com/travel360/api/config/SecurityConfig.class
