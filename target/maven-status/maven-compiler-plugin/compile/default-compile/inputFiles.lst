@@ -43,5 +43,6 @@
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/model/FlightStatus.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/auth/RegisterResponse.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/flight/AirportDto.java
+/home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/common/Pagination.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/repository/UserRepository.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/repository/AirplaneRepository.java

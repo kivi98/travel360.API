@@ -1,5 +1,6 @@
 com/travel360/api/service/impl/UserServiceImpl.class
 com/travel360/api/exception/GlobalExceptionHandler.class
+com/travel360/api/dto/common/Pagination.class
 com/travel360/api/controller/FlightController.class
 com/travel360/api/dto/booking/BookingResponse.class
 com/travel360/api/config/CorsConfig.class

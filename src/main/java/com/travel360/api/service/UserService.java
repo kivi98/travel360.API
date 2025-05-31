@@ -7,6 +7,8 @@ import com.travel360.api.dto.auth.RegisterResponse;
 import com.travel360.api.dto.user.UserResponse;
 import com.travel360.api.model.Role;
 import com.travel360.api.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,8 @@ public interface UserService {
     RegisterResponse registerUser(RegisterRequest registerRequest, Role role);
     
     List<UserResponse> getAllUsers();
+    
+    Page<UserResponse> getAllUsers(Pageable pageable, String role, String search, Boolean active);
     
     Optional<User> getUserById(Long id);
     

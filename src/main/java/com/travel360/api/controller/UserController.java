@@ -1,6 +1,7 @@
 package com.travel360.api.controller;
 
 import com.travel360.api.dto.common.ApiResponse;
+import com.travel360.api.dto.common.Pagination;
 import com.travel360.api.dto.user.UserResponse;
 import com.travel360.api.model.User;
 import com.travel360.api.service.UserService;
@@ -12,6 +13,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +35,7 @@ public class UserController {
     @GetMapping
     @Operation(
         summary = "Get all users",
-        description = "Retrieve all users in the system. Requires ADMINISTRATOR role.",
+        description = "Retrieve all users in the system with pagination support. Requires ADMINISTRATOR role.",
         security = @SecurityRequirement(name = "bearerAuth")
     )
     @ApiResponses(value = {
@@ -51,7 +56,60 @@ public class UserController {
             )
         )
     })
-    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers() {
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String role,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Boolean active,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "asc") String sortOrder) {
+        try {
+            Sort sort = sortOrder.equalsIgnoreCase("desc") ?
+                    Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+            Pageable pageable = PageRequest.of(page, size, sort);
+
+            // Pass all params to the service
+            Page<UserResponse> userPage = userService.getAllUsers(pageable, role, search, active);
+
+            Pagination pagination = new Pagination(
+                    userPage.getNumber(),
+                    userPage.getSize(),
+                    userPage.getTotalElements()
+            );
+
+            return ResponseEntity.ok(ApiResponse.success(userPage.getContent(), pagination));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError()
+                    .body(ApiResponse.error("Failed to retrieve users", "Internal server error"));
+        }
+    }
+
+    @GetMapping("/all")
+    @Operation(
+        summary = "Get all users (no pagination)",
+        description = "Retrieve all users in the system without pagination. Requires ADMINISTRATOR role.",
+        security = @SecurityRequirement(name = "bearerAuth")
+    )
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "Users retrieved successfully",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = ApiResponse.class)
+            )
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "403",
+            description = "Forbidden - Requires ADMINISTRATOR role",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = ApiResponse.class)
+            )
+        )
+    })
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsersNoPagination() {
         try {
             List<UserResponse> users = userService.getAllUsers();
             return ResponseEntity.ok(ApiResponse.success(users, "Retrieved " + users.size() + " users"));

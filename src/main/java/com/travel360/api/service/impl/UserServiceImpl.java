@@ -11,6 +11,8 @@ import com.travel360.api.repository.UserRepository;
 import com.travel360.api.security.JwtTokenProvider;
 import com.travel360.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -107,6 +109,23 @@ public class UserServiceImpl implements UserService {
                         user.getUpdatedAt() != null ? Date.from(user.getUpdatedAt().atZone(ZoneId.systemDefault()).toInstant()) : null
                 ))
                 .toList();
+    }
+
+    @Override
+    public Page<UserResponse> getAllUsers(Pageable pageable, String role, String search, Boolean active) {
+        Page<User> userPage = userRepository.findAll(pageable, role, search, active);
+        return userPage.map(user -> new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNumber(),
+                user.getRole() != null ? user.getRole().name() : null,
+                user.isActive(),
+                user.getCreatedAt() != null ? Date.from(user.getCreatedAt().atZone(ZoneId.systemDefault()).toInstant()) : null,
+                user.getUpdatedAt() != null ? Date.from(user.getUpdatedAt().atZone(ZoneId.systemDefault()).toInstant()) : null
+        ));
     }
 
     @Override

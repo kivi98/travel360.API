@@ -21,6 +21,9 @@ public class ApiResponse<T> {
     @Schema(description = "List of error messages if any", example = "[\"Invalid input\", \"Missing required field\"]")
     private List<String> errors;
 
+    @Schema(description = "Pagination information", example = "{\"page\": 1, \"size\": 10, \"total\": 100}")
+    private Pagination pagination;
+
     // Private constructor to enforce use of static methods
     private ApiResponse() {}
 
@@ -38,6 +41,15 @@ public class ApiResponse<T> {
         response.success = true;
         response.data = data;
         response.message = message;
+        return response;
+    }
+
+    // Success response with pagination data
+    public static <T> ApiResponse<T> success(T data, Pagination pagination) {
+        ApiResponse<T> response = new ApiResponse<>();
+        response.success = true;
+        response.data = data;
+        response.pagination = pagination;
         return response;
     }
 
@@ -107,6 +119,14 @@ public class ApiResponse<T> {
         this.errors = errors;
     }
 
+    public Pagination getPagination() {
+        return pagination;
+    }
+
+    public void setPagination(Pagination pagination) {
+        this.pagination = pagination;
+    }
+
     @Override
     public String toString() {
         return "ApiResponse{" +
@@ -114,6 +134,7 @@ public class ApiResponse<T> {
                 ", data=" + data +
                 ", message='" + message + '\'' +
                 ", errors=" + errors +
+                ", pagination=" + pagination +
                 '}';
     }
 } 
