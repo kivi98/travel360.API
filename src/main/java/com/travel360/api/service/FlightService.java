@@ -5,6 +5,8 @@ import com.travel360.api.dto.flight.FlightSearchRequest;
 import com.travel360.api.model.Airport;
 import com.travel360.api.model.Flight;
 import com.travel360.api.model.FlightStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,17 +14,17 @@ import java.util.Optional;
 
 public interface FlightService {
     
-    List<Flight> getAllFlights();
+    List<FlightDto> getAllFlights();
     
-    List<FlightDto> getAllFlightsDto();
+    Page<FlightDto> getAllFlights(Pageable pageable, String search, FlightStatus status, Long originAirportId, Long destinationAirportId);
     
-    Optional<Flight> getFlightById(Long id);
+    Optional<FlightDto> getFlightById(Long id);
     
-    Optional<Flight> getFlightByNumber(String flightNumber);
+    Optional<FlightDto> getFlightByNumber(String flightNumber);
     
-    Flight createFlight(Flight flight);
+    FlightDto createFlight(Flight flight);
     
-    Flight updateFlight(Flight flight);
+    FlightDto updateFlight(Long id, Flight flight);
     
     void deleteFlight(Long id);
     
@@ -34,7 +36,9 @@ public interface FlightService {
     
     List<FlightDto> getArrivingFlights(Airport airport, LocalDateTime startTime, LocalDateTime endTime);
     
-    List<Flight> getFlightsByStatus(FlightStatus status);
+    List<FlightDto> getFlightsByStatus(FlightStatus status);
     
-    Flight updateFlightStatus(Long id, FlightStatus status);
+    FlightDto updateFlightStatus(Long id, FlightStatus status);
+    
+    boolean existsByFlightNumber(String flightNumber);
 } 

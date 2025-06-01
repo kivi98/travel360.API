@@ -62,8 +62,9 @@ public class FlightControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(searchRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].flightNumber").value("TL123"));
+                .andExpect(jsonPath("$.data", hasSize(1)))
+                .andExpect(jsonPath("$.data[0].flightNumber").value("TL123"))
+                .andExpect(jsonPath("$.status").value("success"));
     }
 
     @Test
@@ -92,10 +93,11 @@ public class FlightControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(searchRequest)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0]", hasSize(2)))
-                .andExpect(jsonPath("$[0][0].flightNumber").value("TL123"))
-                .andExpect(jsonPath("$[0][1].flightNumber").value("TL456"));
+                .andExpect(jsonPath("$.data", hasSize(1)))
+                .andExpect(jsonPath("$.data[0]", hasSize(2)))
+                .andExpect(jsonPath("$.data[0][0].flightNumber").value("TL123"))
+                .andExpect(jsonPath("$.data[0][1].flightNumber").value("TL456"))
+                .andExpect(jsonPath("$.status").value("success"));
     }
 
     @Test
@@ -108,14 +110,15 @@ public class FlightControllerTest {
         );
 
         // Mock service behavior
-        when(flightService.getAllFlightsDto()).thenReturn(mockFlights);
+        when(flightService.getAllFlights()).thenReturn(mockFlights);
 
         // Perform the test
-        mockMvc.perform(get("/api/flights"))
+        mockMvc.perform(get("/api/flights/all"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].flightNumber").value("TL123"))
-                .andExpect(jsonPath("$[1].flightNumber").value("TL456"));
+                .andExpect(jsonPath("$.data", hasSize(2)))
+                .andExpect(jsonPath("$.data[0].flightNumber").value("TL123"))
+                .andExpect(jsonPath("$.data[1].flightNumber").value("TL456"))
+                .andExpect(jsonPath("$.status").value("success"));
     }
 
     private FlightDto createMockFlightDto() {
