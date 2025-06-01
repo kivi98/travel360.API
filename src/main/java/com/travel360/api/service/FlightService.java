@@ -2,6 +2,7 @@ package com.travel360.api.service;
 
 import com.travel360.api.dto.flight.FlightDto;
 import com.travel360.api.dto.flight.FlightSearchRequest;
+import com.travel360.api.dto.flight.FlightSearchResponse;
 import com.travel360.api.model.Airport;
 import com.travel360.api.model.Flight;
 import com.travel360.api.model.FlightStatus;
@@ -31,6 +32,8 @@ public interface FlightService {
     List<FlightDto> searchDirectFlights(FlightSearchRequest request);
     
     List<List<FlightDto>> searchConnectingFlights(FlightSearchRequest request);
+    
+    FlightSearchResponse searchFlights(FlightSearchRequest request);
     
     List<FlightDto> getDepartingFlights(Airport airport, LocalDateTime startTime, LocalDateTime endTime);
     

@@ -4,6 +4,7 @@ import com.travel360.api.dto.common.ApiResponse;
 import com.travel360.api.dto.common.Pagination;
 import com.travel360.api.dto.flight.FlightDto;
 import com.travel360.api.dto.flight.FlightSearchRequest;
+import com.travel360.api.dto.flight.FlightSearchResponse;
 import com.travel360.api.model.Flight;
 import com.travel360.api.model.FlightStatus;
 import com.travel360.api.service.FlightService;
@@ -486,6 +487,41 @@ public class FlightController {
         } catch (Exception e) {
             return ResponseEntity.badRequest()
                 .body(ApiResponse.error(e.getMessage(), "Failed to search connecting flights"));
+        }
+    }
+
+    @PostMapping("/search/comprehensive")
+    @Operation(
+        summary = "Comprehensive flight search",
+        description = "Search for both direct and transit flights in a single request. Returns structured data with separate lists for direct flights and transit flight options. This endpoint is publicly accessible."
+    )
+    @ApiResponses(value = {
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "Successfully found matching flights",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = ApiResponse.class)
+            )
+        ),
+        @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "Invalid search criteria",
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(implementation = ApiResponse.class)
+            )
+        )
+    })
+    public ResponseEntity<ApiResponse<FlightSearchResponse>> searchFlightsComprehensive(
+        @Parameter(description = "Flight search criteria including airports, dates, seat class, and passenger count", required = true)
+        @Valid @RequestBody FlightSearchRequest searchRequest) {
+        try {
+            FlightSearchResponse searchResponse = flightService.searchFlights(searchRequest);
+            return ResponseEntity.ok(ApiResponse.success(searchResponse, searchResponse.getSearchSummary()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest()
+                .body(ApiResponse.error(e.getMessage(), "Failed to search flights"));
         }
     }
 } 

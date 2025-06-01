@@ -39,7 +39,7 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
             @Param("endTime") LocalDateTime endTime);
     
     @Query("SELECT f FROM Flight f WHERE f.originAirport.id = :originId " +
-           "AND f.destinationAirport.id = :destinationId " +
+           "AND (:destinationId IS NULL OR f.destinationAirport.id = :destinationId) " +
            "AND f.departureTime >= :departureTime " +
            "AND f.status IN ('SCHEDULED', 'BOARDING', 'DELAYED')")
     List<Flight> findAvailableDirectFlights(

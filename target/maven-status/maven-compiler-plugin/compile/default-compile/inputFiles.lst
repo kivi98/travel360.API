@@ -35,6 +35,7 @@
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/repository/FlightRepository.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/config/SecurityConfig.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/model/AirplaneSize.java
+/home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/flight/TransitFlightDto.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/auth/LoginRequest.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/flight/FlightDto.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/security/UserDetailsServiceImpl.java
@@ -46,9 +47,11 @@
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/auth/RegisterRequest.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/controller/AuthController.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/model/Booking.java
+/home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/flight/FlightSearchResponse.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/model/Role.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/booking/BookingResponse.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/service/FlightService.java
+/home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/flight/DirectFlightDto.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/security/JwtTokenProvider.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/service/impl/BookingServiceImpl.java
 /home/kiviamarakoon/Documents/Projects/my-projects/Travel360.API/src/main/java/com/travel360/api/dto/auth/RegisterResponse.java

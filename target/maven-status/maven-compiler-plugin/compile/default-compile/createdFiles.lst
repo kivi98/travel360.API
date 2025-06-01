@@ -18,6 +18,7 @@ com/travel360/api/dto/user/UserResponse.class
 com/travel360/api/repository/AirplaneRepository.class
 com/travel360/api/config/OpenApiConfig.class
 com/travel360/api/dto/common/ApiResponse.class
+com/travel360/api/dto/flight/TransitFlightDto.class
 com/travel360/api/controller/BookingController.class
 com/travel360/api/model/User.class
 com/travel360/api/service/AirportService.class
@@ -40,6 +41,7 @@ com/travel360/api/dto/auth/LoginRequest.class
 com/travel360/api/security/JwtTokenProvider.class
 com/travel360/api/controller/AuthController.class
 com/travel360/api/repository/FlightRepository.class
+com/travel360/api/dto/flight/DirectFlightDto.class
 com/travel360/api/dto/flight/AirplaneDto.class
 com/travel360/api/model/Airplane.class
 com/travel360/api/service/UserService.class
@@ -53,7 +55,9 @@ com/travel360/api/model/Flight.class
 com/travel360/api/model/BookingStatus.class
 com/travel360/api/model/BaseEntity.class
 com/travel360/api/model/Flight$1.class
+com/travel360/api/dto/flight/FlightSearchResponse.class
 com/travel360/api/service/impl/BookingServiceImpl.class
 com/travel360/api/security/UserDetailsServiceImpl.class
+com/travel360/api/service/impl/FlightServiceImpl$1.class
 com/travel360/api/repository/UserRepository.class
 com/travel360/api/dto/auth/RegisterRequest.class
